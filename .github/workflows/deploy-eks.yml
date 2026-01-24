@@ -36,11 +36,11 @@ jobs: # 이 workflow에서 실행할 작업들의 모음
           role-to-assume: arn:aws:iam::586794453466:role/GitHubActions-ECR-EKS
           aws-region: ${{ env.AWS_REGION }}
 
-/*GitHub Actions가 OIDC 토큰을 만든다
-AWS STS에 요청한다
-Terraform으로 만든 IAM Role
-(GitHubActions-ECR-EKS)을 runner 서버에 Assume
-runner 서버가 임시 AWS 로그인 완료*/
+# GitHub Actions가 OIDC 토큰을 만든다
+# AWS STS에 요청한다
+# Terraform으로 만든 IAM Role
+# (GitHubActions-ECR-EKS)을 runner 서버에 Assume
+# runner 서버가 임시 AWS 로그인 완료*
 
       - name: Login to Amazon ECR
         id: ecr-login
