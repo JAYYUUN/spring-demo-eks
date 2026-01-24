@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-app # Deployment 이름
+  namespace: default # 이 Deployment가 존재할 공간이며, default = 기본 네임스페이스
+  labels:
+    app: spring-app # 식별자
+spec:
+  replicas: 2 # 파드 개수는 항상 2개를 유지
+  selector:
+    matchLabels:
+      app: spring-app # 이 Deployment가 관리할 파드는 spring-app
+  strategy:
+    type: RollingUpdate # 배포 방식 :새 파드를 조금씩 띄우면서 교체
+    rollingUpdate:
+      maxSurge: 25% # 업데이트 중 추가로 띄워도 되는 파드 비율
+      maxUnavailable: 25% # 업데이트 중 죽어도 되는 파드 수
+  template:
+    metadata:
+      labels:
+        app: spring-app
+    spec:
+      containers:
+        - name: spring-app
+          image: <AWS ID>.dkr.ecr.ap-northeast-2.amazonaws.com/my-spring-app:latest # 실제 실행할 Docker 이미지
+          ports:
+            - containerPort: 8080
+          readinessProbe: # 이 파드는 요청을 받아도 되는 상태인가? 실패시 Service 트래픽에서 제외
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3
+          livenessProbe: # 이 컨테이는 정상 동작 중인가? 실패시 컨테이너를 강제 재시작
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 20
+            timeoutSeconds: 1
+            failureThreshold: 3

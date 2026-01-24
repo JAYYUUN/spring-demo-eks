@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-app # 이 서비스 이름
+  namespace: default
+spec:
+  selector:
+    app: spring-app # label이 app=spring-app 인 Pod들에게만 트래픽을 보내겠다
+  ports:
+    - port: 80 # Service 입구 포트
+      targetPort: 8080 # Pod 안 컨테이너가 실제로 듣고 있는 포트
+  type: LoadBalancer
