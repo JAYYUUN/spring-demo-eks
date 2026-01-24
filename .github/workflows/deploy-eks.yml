@@ -97,3 +97,5 @@ jobs: # 이 workflow에서 실행할 작업들의 모음
         if: always()
         run: |
           kubectl -n "${K8S_NAMESPACE}" get deploy,"po" -o wide
+
+      
