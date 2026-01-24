@@ -45,7 +45,7 @@ jobs: # 이 workflow에서 실행할 작업들의 모음
       - name: Login to Amazon ECR
         id: ecr-login
         uses: aws-actions/amazon-ecr-login@v2
-/*runner 위에서 실행중인 docker가 AWS ECR에 로그인*/
+#runner 위에서 실행중인 docker가 AWS ECR에 로그인
 
       # 이미지 태그: 커밋 SHA(고정) + latest(편의) 
       - name: Build, tag, and push image to ECR
