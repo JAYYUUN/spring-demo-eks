@@ -59,7 +59,7 @@ jobs: # 이 workflow에서 실행할 작업들의 모음
           IMAGE_URI_LATEST="${ECR_REGISTRY}/${ECR_REPOSITORY}:latest"  
 
           echo "Build -> ${IMAGE_URI_SHA}"
-          docker build -t "${IMAGE_URI_SHA}" -t "${IMAGE_URI_LATEST}" . # 현재 디렉토리(.)의 Dockerfile로 이미지 생성, 태그 값은 정확한 버전 (불변) 및 최신 버전으로 하여 이미지 생성
+          docker build dockerfile -t "${IMAGE_URI_SHA}" -t "${IMAGE_URI_LATEST}" . # 현재 디렉토리(.)의 Dockerfile로 이미지 생성, 태그 값은 정확한 버전 (불변) 및 최신 버전으로 하여 이미지 생성
 
           echo "Push -> ${IMAGE_URI_SHA}"
           docker push "${IMAGE_URI_SHA}" # runner 서버에 만든 이미지를 ECR(원격 저장소)에 업로드
