@@ -6,9 +6,10 @@ WORKDIR /app
 
 
 # (캐시 최적화) 의존성 관련 파일을 먼저 복사
-COPY build.gradle* settings.gradle* gradle.properties* /app/
+COPY build.gradle.kts /app/
+COPY settings.gradle.kts /app/
+COPY gradlew /app/
 COPY gradle /app/gradle
-COPY gradlew /app/gradlew
 
 # 의존성 캐시 준비 (테스트/빌드는 다음 단계에서)
 # gradlew가 윈도우에서 올라오면 CRLF 때문에 실행 에러 날 수 있어 chmod 같이 해줌
