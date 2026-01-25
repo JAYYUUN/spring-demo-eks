@@ -16,7 +16,7 @@ env: # 이 workflow 전체에서 공통으로 쓰는 변수 선언 영역
   ECR_REPOSITORY: my-spring-app
 
   # ===== EKS =====
-  EKS_CLUSTER_NAME: demo-eks-cluster
+  EKS_CLUSTER_NAME: demo-eks
   K8S_NAMESPACE: default
   K8S_DEPLOYMENT_NAME: spring-app
   K8S_CONTAINER_NAME: spring-app
