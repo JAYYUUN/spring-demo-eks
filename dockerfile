@@ -8,6 +8,7 @@ WORKDIR /app
 
 # 소스 복사 후 빌드
 COPY . /app # 현재 Dockerfile이 있는 폴더의 모든 파일을 컨테이너(빌드 단계) 내부의 /app 디렉토리로 복사하라
+RUN chmod +x /app/gradlew
 RUN ./gradlew --no-daemon clean bootJar -x test
 
 # ---- 2) Runtime stage ----
