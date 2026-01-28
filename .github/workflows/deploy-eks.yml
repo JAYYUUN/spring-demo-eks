@@ -74,7 +74,7 @@ jobs: # 이 workflow에서 실행할 작업들의 모음
           aws eks update-kubeconfig \
             --region "${AWS_REGION}" \
             --name "${EKS_CLUSTER_NAME}"
-      # kubectl 이 어느 리전, 클러스터에, 어떤 권한으로 접근할지 적혀 있는 설정 파일
+      # kubectl 이 어느 리전, 클러스터에 접근할지 적혀 있는 설정 파일
 
 
       - name: Apply Kubernetes manifests
@@ -97,5 +97,6 @@ jobs: # 이 workflow에서 실행할 작업들의 모음
         if: always()
         run: |
           kubectl -n "${K8S_NAMESPACE}" get deploy,"po" -o wide
+
 
       
